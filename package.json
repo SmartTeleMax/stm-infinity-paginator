@@ -1,0 +1,19 @@
+{
+  "name": "stm-infinity-paginator",
+  "version": "1.0.0",
+  "description": "Infinity paginator for long news feeds, History API hookable",
+  "main": "infinity-paginator.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SmartTeleMax/stm-infinity-paginator.git"
+  },
+  "author": "Arthur Chafonov",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SmartTeleMax/stm-infinity-paginator/issues"
+  },
+  "homepage": "https://github.com/SmartTeleMax/stm-infinity-paginator#readme"
+}
