@@ -5,8 +5,9 @@ noempty:true, nonew:true, undef:true, strict:true, browser:true, devel:true, jqu
 
 'use strict';
 
-import {router} from "../main"; // XXX
-import "../lib/utils";
+
+require('core-js/es5');
+var $ = require('jquery');
 
 /**
  * Default plugin options.
@@ -665,12 +666,14 @@ InfinityPaginator.prototype.onScroll = function(e) {
         return;
     }
 
-    if (router && router._xhr) { // XXX yes, I know! this is project dependency.
-                       //     But I don't know how to hack this
-        // Hack: do not change the URL while the request is in progress
-        // This is made to eliminate race conditions on URL change with 
-        // router handlers.
-        // See test_back_on_endless_page test case.
+    var handleScroll = true;
+    if (typeof this._options.handleScroll === 'function') {
+        handleScroll = this._options.handleScroll();
+    } else if (this._options.handleScroll !== undefined) {
+        handleScroll = !!this.options.handleScroll;
+    }
+
+    if (!handleScroll) {
         return;
     }
 
@@ -834,42 +837,3 @@ InfinityPaginator.prototype.off = function(eventName, func) {
     return this;
 };
 
-// jQuery plugin bindings
-if (typeof $ === 'object' && $.fn) {
-    var old = $.fn.paginator;
-
-    /**
-     *
-     * @param {Object} option
-     * @param {Element} _relatedTarget
-     * @return {*}
-     */
-    $.fn.paginator = function(option, _relatedTarget) {
-        return this.each(function() {
-            var $this = $(this);
-            var data = $this.data('paginator');
-            var options = $.extend({}, defaults, $this.data(), typeof option === 'object' && option);
-
-            if (!data) {
-                options.element = this;
-                $this.data('paginator', (data = new InfinityPaginator(options)));
-            }
-            if (typeof option === 'string') {
-                data[option](_relatedTarget);
-            }
-            else if (options.show) {
-                data.show(_relatedTarget);
-            }
-        });
-    };
-
-    $.fn.paginator.Constructor = InfinityPaginator;
-
-    // PAGINATOR NO CONFLICT
-    // ==================
-
-    $.fn.paginator.noConflict = function() {
-        $.fn.paginator = old;
-        return this;
-    };
-    }

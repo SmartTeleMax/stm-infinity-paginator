@@ -1,7 +1,7 @@
 {
   "name": "stm-infinity-paginator",
   "version": "1.0.0",
-  "description": "Infinity paginator for long news feeds, History API hookable",
+  "description": "Infinity paginator for long news feeds, supports History API, is hookable",
   "main": "infinity-paginator.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +15,9 @@
   "bugs": {
     "url": "https://github.com/SmartTeleMax/stm-infinity-paginator/issues"
   },
-  "homepage": "https://github.com/SmartTeleMax/stm-infinity-paginator#readme"
+  "homepage": "https://github.com/SmartTeleMax/stm-infinity-paginator#readme",
+  "dependencies": {
+    "core-js": "^2.4.1",
+    "jquery": ">= 1.11.0"
+  }
 }
