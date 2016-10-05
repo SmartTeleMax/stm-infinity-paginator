@@ -19,6 +19,7 @@
   },
   "homepage": "https://github.com/SmartTeleMax/stm-infinity-paginator#readme",
   "dependencies": {
+    "core-js": ">= 2.4.1",
     "jquery": ">= 1.11.0"
   },
   "devDependencies": {
