@@ -7,7 +7,7 @@ noempty:true, nonew:true, undef:true, strict:true, browser:true, devel:true, jqu
 
 
 require('core-js/es5');
-var $ = require('jquery');
+var $ = require('jquery'); // XXX unnecessary?
 
 /**
  * Default plugin options.
