@@ -8,6 +8,7 @@ noempty:true, nonew:true, undef:true, strict:true, browser:true, devel:true,
 
 require('core-js/es5');
 var $ = require('jquery');
+var debounce = require('debounce');
 
 /**
  * Default plugin options.
