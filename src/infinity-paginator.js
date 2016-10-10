@@ -1,13 +1,13 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, noarg:true,
 noempty:true, nonew:true, undef:true, strict:true, browser:true, devel:true, jquery:true,
     esversion: 6, -W097 */
-/*global jQuery: true, $: true, console: true, debounce */
+/*global console: true, debounce */
 
 'use strict';
 
 
 require('core-js/es5');
-var $ = require('jquery'); // XXX unnecessary?
+var $ = require('jquery');
 
 /**
  * Default plugin options.
@@ -196,36 +196,14 @@ export class InfinityPaginator {
      * @param {Object} options
      */
     load(options) {
-        var req;
-        if (window.jQuery !== undefined) {
-            req = $.ajax({
-                dataType: options.dataType,
-                url: options.url,
-                data: options.data,
-                success: options.success,
-                error: options.error
-            });
-            this._state.requests.push(req);
-        } else {
-            req = new XMLHttpRequest();
-            req.open('GET', options.url);
-            req.onreadystatechange = function() {
-                // Request is DONE
-                if (req.readyState === 4) {
-                    if (req.status === 200) {
-                        if (typeof options.success === 'function') {
-                            options.success(req.responseText);
-                        }
-                    }
-                }
-            };
-            req.onerror = function() {
-                if (typeof options.success === 'function') {
-                    options.error(req);
-                }
-            };
-            req.send();
-        }
+        var req = $.ajax({
+            dataType: options.dataType,
+            url: options.url,
+            data: options.data,
+            success: options.success,
+            error: options.error
+        });
+        this._state.requests.push(req);
         // Chaining.
         return this;
     };
@@ -630,34 +608,24 @@ export class InfinityPaginator {
 
     /**
      * Framework agnostic event listener.
-     * @param {Element|jQuery} element
+     * @param {jQuery} element
      * @param {String} type
      * @param {Function} handler
      */
     addEvent(element, type, handler) {
-        if (window.jQuery !== undefined) {
-            $(element).bind(type, handler);
-        } else if (window.MooTools !== undefined) {
-            element.addEvent(type, handler);
-        } else {
-            console.warn('Provide either MooTools or jQuery', $, jQuery);
-        }
+        $(element).bind(type, handler);
         // Chaining.
         return this;
     };
 
     /**
      * Framework agnostic event listener remover.
-     * @param {Element|jQuery} element
+     * @param {jQuery} element
      * @param {String} type
      * @param {Function} handler
      */
     removeEvent(element, type, handler) {
-        if (window.jQuery !== undefined) {
-            $(element).unbind(type, handler);
-        } else if (window.MooTools !== undefined) {
-            element.removeEvent(type, handler);
-        }
+        $(element).unbind(type, handler);
         // Chaining.
         return this;
     };
