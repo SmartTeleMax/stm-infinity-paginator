@@ -1,7 +1,7 @@
 /*jshint bitwise:true, curly:true, eqeqeq:true, forin:true, noarg:true,
-noempty:true, nonew:true, undef:true, strict:true, browser:true, devel:true, jquery:true,
+noempty:true, nonew:true, undef:true, strict:true, browser:true, devel:true,
     esversion: 6, -W097 */
-/*global console: true, debounce */
+/*global console: true, require */
 
 'use strict';
 
@@ -127,7 +127,7 @@ export class InfinityPaginator {
             {scrollTop: position},
             duration
         );
-    };
+    }
 
     /**
      * Initiates state with default and configured options:
@@ -174,7 +174,7 @@ export class InfinityPaginator {
         //        self.scrollToPage(self._state.currentPage);
         //    }, 200);
         //}
-    };
+    }
 
     /**
      * Reinitialize the plugin by setting the state.
@@ -189,7 +189,7 @@ export class InfinityPaginator {
         }
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Main request routine. Configures and sends request.
@@ -206,7 +206,7 @@ export class InfinityPaginator {
         this._state.requests.push(req);
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Aborts page loading.
@@ -219,7 +219,7 @@ export class InfinityPaginator {
         }
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Configures page load request, sends it and render response,
@@ -273,7 +273,7 @@ export class InfinityPaginator {
         });
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Handles page load failure.
@@ -290,7 +290,7 @@ export class InfinityPaginator {
             this._options.didFailLoad(options, res);
         }
         this.trigger('error', options, res);
-    };
+    }
 
     /**
      * Handles page load success.
@@ -323,7 +323,7 @@ export class InfinityPaginator {
                 this.renderPage(options, res);
             }
         }
-    };
+    }
 
 
     withSavedScroll(action) {
@@ -340,7 +340,7 @@ export class InfinityPaginator {
             (_yDelta < 0 ? '-=' : '+=') + String(Math.abs(_yDelta)),
             0,
             {force: true});
-    };
+    }
 
     /**
      * Constructs DOM for the page and places it appropriately.
@@ -385,7 +385,7 @@ export class InfinityPaginator {
         this.trigger('render', options, $html);
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Loads next page.
@@ -419,7 +419,7 @@ export class InfinityPaginator {
         }
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Loads previous page.
@@ -453,7 +453,7 @@ export class InfinityPaginator {
         }
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Resolves current scrolling state.
@@ -542,7 +542,7 @@ export class InfinityPaginator {
         } else {
             return (toTop - this._options.edgePixelsTop < 0) || (toBottom - this._options.edgePixelsBottom < 0);
         }
-    };
+    }
 
     /**
      * Handles URL navigation.
@@ -565,15 +565,15 @@ export class InfinityPaginator {
         this.trigger('navigate', url);
         // Chaining.
         return this;
-    };
+    }
 
     pause() {
         this._state.isPaused = true;
-    };
+    }
 
     resume() {
         this._state.isPaused = false;
-    };
+    }
 
     /**
      * Scrolls the container to specified page.
@@ -594,7 +594,7 @@ export class InfinityPaginator {
         }
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Pre-loads pages (+-1) and append them to DOM.
@@ -604,7 +604,7 @@ export class InfinityPaginator {
         this.nextPage();
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Framework agnostic event listener.
@@ -616,7 +616,7 @@ export class InfinityPaginator {
         $(element).bind(type, handler);
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Framework agnostic event listener remover.
@@ -628,7 +628,7 @@ export class InfinityPaginator {
         $(element).unbind(type, handler);
         // Chaining.
         return this;
-    };
+    }
 
 
     onScroll(e) {
@@ -722,7 +722,7 @@ export class InfinityPaginator {
             }
         }
 
-    };
+    }
 
 
     /**
@@ -760,7 +760,7 @@ export class InfinityPaginator {
         this.addEvent(container, 'scroll', debounce(this.onScroll.bind(this), 75));
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Removes event listeners.
@@ -772,7 +772,7 @@ export class InfinityPaginator {
         this.removeEvent(window, 'keydown');
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Event triggering support.
@@ -785,7 +785,7 @@ export class InfinityPaginator {
         $(this).trigger(eventName + '.paginator', args);
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Event binding support.
@@ -796,7 +796,7 @@ export class InfinityPaginator {
         $(this).on(eventName + '.paginator', func);
         // Chaining.
         return this;
-    };
+    }
 
     /**
      * Event unbinding support.
@@ -807,6 +807,6 @@ export class InfinityPaginator {
         $(this).off(eventName + '.paginator', func);
         // Chaining.
         return this;
-    };
+    }
 }
 
